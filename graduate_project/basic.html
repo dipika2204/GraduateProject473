@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html ng-app="Booking">
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body ng-controller="Booking_controller">
+    <!-- MENU BAR -->
+    <nav class="grey darken-1">
+        <div class="nav-fixed">
+            <a href="#" class="brand-logo"> &nbsp; METRO BOOKING</a>
+
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a class="waves-effect waves-green modal-trigger" ng-click="modal_login()" href="#login">Sign-in</a></li>
+
+                <li><a class="waves-effect waves-green  modal-trigger" ng-click="modal_register()" href="#register">Sign-up</a></li>
+                <li><a class="waves-effect waves-green ">About us</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Modal Structure -->
+    <div id="login" class="modal">
+        <div class="modal-header right">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">X close</a>
+        </div>
+        <div class="modal-content">
+
+            <div class="col l12 m12 s12">
+                <div class="input-field">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input placeholder="Userame" id="u1" ng-model="u1" type="text" class="validate">
+                </div>
+                <div class="input-field">
+                    <i class="material-icons prefix">vpn_key</i>
+                    <input placeholder="Password" id="p1" ng-model="p1" type="password" class="validate">
+                </div>
+                <br>
+                <div>
+                    <button type="submit" class="waves-effect waves-light btn" ng-click="checkforinput()" id="from_database"> Login </button>
+
+                </div>
+                <br>
+                <div>
+                    <a class="btn waves-effect waves-green modal-close modal-trigger" href="#register">Sign-up</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="register" class="modal">
+        <div class="modal-header right">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">X close</a>
+        </div>
+        <div class="modal-content">
+            <input placeholder="First Name" required="true" type="text" ng-model="firstname" id="first_name" />
+            <input placeholder="Last Name" required="true" type="text" ng-model="lastname" id="last_name" />
+            <input placeholder="Username" required="true" type="text" id="username" ng-model="username">
+            <input placeholder="Password" required="true" type="password" id="password" name="password" class="password" ng-model="password"
+            />
+            <input type="checkbox" id="showHide" />
+            <input placeholder="Age" required="true" type="text" id="age" ng-model="age" />
+            <input placeholder="Date of Birth" required="true" type="text" id="dob" ng-model="dob" />
+            <input placeholder="E-mail ID" required="true" type="email" id="emailid" ng-model="emailid" />
+            <button class="waves-effect waves-light btn" type="submit" ng-click="adding_to_json()" id="to_json">Register</button>
+        </div>
+    </div>
+    <!--   <u>Output:</u>
+           <p> {{output}}</p>-->
+    <!--Main-->
+    <div class="slider">
+        <ul class="slides">
+            <li>
+                <img src="images/homepage_photo.jpg">
+            </li>
+            <li>
+                <img src="images/homepage_photo3.jpg">
+            </li>
+            <li>
+                <img src="images/homepage_photo1.jpg">
+            </li>
+            <li>
+                <img src="images/homepage_photo.jpg">
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div>
+            <ul class="tabs">
+                <li class="tab col s12 m6 l4"><a class="active" href="#traininformation">TRAIN INFORMATION</a></li>
+                <!--<li class="tab col s12 m6 l4"><a href="#estimate">ESTIMATE</a></li>-->
+                <li class="tab col s12 m6 l4"><a href="#trainstatus" ng-click="trial_history()">USERS HISTORY</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="traininformation">
+        <div class="input-field row">
+
+            <div class="col s3">
+                <select class="fromStation" ng-model="fromstation">
+                    <option value="" disabled selected>Source</option>
+                    <option value="{{stat}}" ng-repeat="stat in stations">{{stat}}</option>
+                </select>
+            </div>
+            <div class="col s3">
+
+                <select class="toStation" ng-model="tostation">
+                    <option value="" disabled selected>Destination</option>
+                    <option value="{{stat}}" ng-repeat="stat in stations">{{stat}}</option>
+                </select>
+
+            </div>
+        </div>
+
+
+        <a class="waves-effect waves-light btn" ng-click="check_trains()"><i class="material-icons left">receipt</i>Trains</a>
+
+        <select class="sourceTimeSelect" ng-change="setTrainTime()" ng-model="selectedTime" ng-options="dep as dep for dep in sourceTimes track by dep">
+            <!--<option ng-repeat="dep in sourceTimes">{{dep}}</option>-->
+        </select>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Station</th>
+                    <th>Train</th>
+                    <th>Arrival</th>
+                    <th>Departure</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan=4> {{trains._id}} </td>
+                </tr>
+                <tr ng-repeat="station in trains.stations">
+                    <td>{{station.name}}</td>
+                    <td>{{station.distance}}</td>
+                    <td>{{station.arrival[tainIndex]}}</td>
+                    <td>{{station.depature[tainIndex]}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="col s1">
+            <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" ng-model="fare" />
+            <label for="filled-in-box">CHECK FARE</label>
+
+        </div>
+
+        <div class="input-field row" ng-hide="!fare" ng-init="initializeSelect()">
+            <div class="col s3">
+                <datapicker>
+                    <input type="text" placeholder="DATE" ng-model="date" id="datepicker">
+
+                </datapicker>
+            </div>
+            <div class="col s3">
+                <select class="ppl" ng-model="noofppl">
+                    <option value="" disabled selected>PPL</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <a class="waves-effect waves-green modal-trigger btn" ng-click="fares()" href="#fares"><i class="material-icons left">description</i>FARES</a>
+            <!-- Modal Structure-->
+            <div id="fares" class="modal">
+                <div class="modal-header right">
+                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">X close</a>
+                </div>
+                <div class="modal-content">
+                    <div>FROM Station:{{fromstation}}</div>
+                    <div>TO Station:{{tostation}}</div>
+                    <div>On:{{date}}</div>
+                    <div>Quantity:{{noofppl}}</div>
+                    <div>for 1:{{price}}</div>
+                    <div>Total:${{final}}</div>
+                    <a class="waves-effect waves-green modal-trigger btn" ng-click="save_to_myprofile()">SAVE(the transaction)</a>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                        <input type="hidden" name="cmd" value="_xclick">
+                        <input type="hidden" name="business" value="dipika.mahashabde22@gmail.com">
+                        <input type="hidden" name="item_name" value={{fromstation}}-{{tostation}}>
+                        <input type="hidden" name="currency_code" value="USD">
+                        <input type="hidden" name="amount" value=${{final}}>
+                        <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+    <div id="trainstatus" class="col s12">
+        <div ng-repeat="hist in history ">
+        <p><strong>hist</strong></p>
+        <p><strong>Source:{{hist.fromstation}}</strong></p>
+        <p><strong>Destination:{{hist.tostation}}</strong></p>
+        <p><strong>on:{{hist.on}}</strong></p>
+        <p><strong>Price:{{hist.price}}</strong></p>
+        </div>
+    </div>
+    <!-- footer -->
+    <footer class="page-footer grey darken-1">
+
+        <div class="container">© 2016 Copyright Dipika Mahashabde
+            <a class="grey-text text-lighten-4 right" href="#!">Maps</a>
+        </div>
+    </footer>
+
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script src="JS/basic.js"></script>
+</body>
+
+</html>

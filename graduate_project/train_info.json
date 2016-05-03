@@ -1,0 +1,43 @@
+{
+    "source": "Fullerton",
+   "destination": "Los Angeles",
+   "train_depature": ["8:00am","12:00pm","5:00pm","7:00pm"],
+   "train_arrival": ["9:35am","1:35pm","6:35pm","8:35pm"],
+   "stations": [
+       {
+           "seq": "1",
+           "name": "Fullerton",
+           "distance": "0",
+           "arrival": ["8:00am","12:00pm","5:00pm","7:00pm"],
+           "depature": ["8:00am","12:00pm","5:00pm","7:00pm"]
+       },
+       {
+           "seq": "2",
+           "name": "Buena Park",
+           "distance": "10",
+           "arrival": ["8:10am","12:10pm","5:10pm","7:10pm"],
+           "depature": ["8:15am","12:15pm","5:15pm","7:15pm"]
+       },
+       {
+           "seq": "3",
+           "name": "Santa Fe",
+           "distance": "25",
+           "arrival": ["8:30am","12:30pm","5:30pm","7:30pm"],
+           "depature": ["8:40am","12:40pm","5:40pm","7:40pm"]
+       },
+       {
+           "seq": "4",
+           "name": "Commerce",
+           "distance": "40",
+           "arrival": ["8:55am","12:55pm","5:55pm","7:55pm"],
+           "depature": ["9:00am","1:00pm","6:00pm","8:00pm"]
+       },
+       {
+           "seq": "5",
+           "name": "Los Angeles",
+           "distance": "60",
+           "arrival": ["9:30am","1:35pm","6:35pm","8:35pm"],
+           "depature": ["9:30am","1:35pm","6:35pm","8:35pm"]
+       }
+   ]
+}
