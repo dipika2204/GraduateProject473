@@ -4,7 +4,9 @@ metro. Our application will help them book the ticket on-line prior to going to 
 see the train schedules prior to book their ticket and also see the time slot allotted to the train to travel from different locations.
 They  will also be able to check the fare of their travel. Also, they can book tickets for max 5 people (ppl). Thereafter the customer may
 proceed to save their transaction and checkout to payment. The customer may also login at a later time and check his saved history.
+
 Steps for installing and running the application:
+
 •	Install CouchDB on the terminal :- sudo su -c “apt-get install couchdb”
 
 •	After the installation start the service :- sudo service couchdb start 
